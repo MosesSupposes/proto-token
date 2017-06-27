@@ -2,10 +2,8 @@ contract ProtoToken {
     // This creates an array with all balances
     mapping (address => uint256) public balanceOf;
 
-    // Initializes contract with initial supply tokens to the creator of the contract
-    function ProtoToken(
-        uint256 initialSupply = 21000000;
-    ) {
+    // Initializes contract with initial supply tokens to the creator of the contract. This value can be set on the Ethereum Wallet Client, so we'll leave it blank for now.
+    function ProtoToken(uint256 initialSupply) {
         balanceOf[msg.sender] = initialSupply;      // Give the creator all initial tokens
     }
 
