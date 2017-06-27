@@ -22,6 +22,7 @@ contract ProtoToken is onwed {
     string public name;
     string public symbol;
     uint8 public decimals;
+    uint256 public totalSupply,
     
     /* This creates an array with all balances */
     mapping (address => uint256) public balanceOf;
@@ -38,6 +39,7 @@ contract ProtoToken is onwed {
         string tokenSymbol,
         address centralMinter
         ) {
+        totalSupply = initialSupply;
         balanceOf[msg.sender] = initialSupply;  // Give the creator all initial tokens
         if (centralMinter != 0) owner = centralMinter;  // Make the address of the contract's owner the central minter
         name = tokenName;
@@ -51,5 +53,12 @@ contract ProtoToken is onwed {
         balanceOf[msg.sender] -= _value;                      // Subtract from the sender
         balanceOf[_to] += _value;                             // Add the same to the recipient
         Transfer(msg.sender, _to, _value);                    // Notify anyone listening that this transfer took place       
+    }
+
+    function mintToken(address target, uint256 mintedAmount) onlyOwner {
+        balanceOf[target] += mintedAmount;
+        totalSupply += mintedAmount;
+        Transfer(0, owner, mintedAmount);
+        Transfer(owner, target, mintedAmount);
     }
 }
