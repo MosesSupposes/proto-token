@@ -4,7 +4,7 @@ contract ProtoToken {
 
     // Initializes contract with initial supply tokens to the creator of the contract
     function ProtoToken(
-        uint256 initialSupply
+        uint256 initialSupply = 21000000;
     ) {
         balanceOf[msg.sender] = initialSupply;      // Give the creator all initial tokens
     }
